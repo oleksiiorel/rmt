@@ -139,7 +139,7 @@ $RPM --import repomd.xml.key
 
 if [ ! -x $SUSECONNECT ]; then
     echo "Downloading SUSEConnect"
-if [[ ${SLL_version} > 8 ]]; then
+if [[ ${SLL_version} > 7 ]]; then
 
     if [ ! -x $DNF ]; then
         echo "dnf command not found. Abort."
