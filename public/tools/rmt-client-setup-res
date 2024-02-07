@@ -77,7 +77,7 @@ fi
 
 if [ -z "$REGURL" ]; then
     echo "Missing registration URL. Abort."
-    usage
+    exit 1
 fi
 
 if [ ! -x $RPM ]; then
@@ -120,15 +120,18 @@ if [ -x $UPDATE_CA_TRUST ]; then
 fi
 
 SLL_version=`cat /etc/os-release | grep "VERSION_ID" | cut -d\" -f2 | cut -d\. -f1`
-if [[ ${SLL_version} > 8 ]]; then                                                                                                       
+if [[ ${SLL_version} > 8 ]]; then
    SLL_name="SLL";                                                                                                                
    SLL_release_package="sll-release"                                                                                              
 elif [[ ${SLL_version} -eq 7 ]]; then
    SLL_name="RES";
    SLL_release_package="sles_es-release-server"
+elif [[ ${SLL_version} -eq 8 ]]; then
+    SLL_name="RES";                      
+    SLL_release_package="sles_es-release"
 else                                                                                                                                 
-   SLL_name="RES";                                                                                                                
-   SLL_release_package="sles_es-release"                                                                                       
+   echo "Unsupported or unknown base version. Abort";
+   exit 1
 fi                                                                                                                                   
 
 echo "detect ${SLL_name} version... ${SLL_version}"                                                                                  
