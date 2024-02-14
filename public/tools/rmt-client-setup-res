@@ -158,6 +158,7 @@ if [ -f /etc/dnf/protected.d/redhat-release.conf ]; then
 fi
 
     $DNF config-manager --add-repo ${REGURL}/repo/SUSE/Updates/${SLL_name}/${SLL_version}/x86_64/update
+    $DNF config-manager --add-repo ${REGURL}/repo/SUSE/Updates/${SLL_name}-AS/${SLL_version}/x86_64/update
     $DNF install --allowerasing ${SLL_release_package}
 
     # For RHEL8/CentOS8, remove all old signing keys and import SUSE keys installed with sles_es-release package
